@@ -9,31 +9,37 @@ $(".container").slideToggle(0);
 $(".btn").click(function(){
     playPress(this.id);
     playSound(this.id);
-    if (p == gamePattern.length - 1){
-        if (this.id == gamePattern[p]){
-            // Next level
-            console.log("Level completed!")
-            setTimeout(function (){
-                p = 0;
-                nextSequence();
-            } , 1000);
-            
+    if(this.id == "red" || this.id == "blue" || this.id == "green" || this.id == "yellow"){
+        if (p == gamePattern.length - 1){
+            if (this.id == gamePattern[p]){
+                // Next level
+                console.log("Level completed!")
+                setTimeout(function (){
+                    p = 0;
+                    nextSequence();
+                } , 1000);
+                
+            } else {
+                // Wrong color
+                console.log("Wrong!")
+                gameOver();
+            }
         } else {
-            // Wrong color
-            console.log("Wrong!")
-            gameOver();
+            if (this.id == gamePattern[p]){
+                // Correct color
+                console.log("Correct!")
+                p += 1;
+            } else {
+                // Wrong Color
+                console.log("Wrong!");
+                gameOver();
+            }
         }
-    } else {
-        if (this.id == gamePattern[p]){
-            // Correct color
-            console.log("Correct!")
-            p += 1;
-        } else {
-            // Wrong Color
-            console.log("Wrong!");
-            gameOver();
-        }
-    }
+    } else if (this.id == "start"){
+        $("#start").slideToggle(200);
+        $(".container").slideToggle(200);
+        setTimeout(function(){nextSequence()}, 1000);
+    } else {}
 });
 
 // Press A to start/restart game
@@ -43,6 +49,9 @@ $("body").keypress(function(event){
         setTimeout(function(){nextSequence()}, 400);
     }
 });
+
+// Activate buttons color
+btnColor("yellow");
 
 // <!> FUNCTIONS <!>
 // Perfrom next color sequence
@@ -59,6 +68,9 @@ function nextSequence(){
 
 // Play the color sound
 function playSound(value){
+    // Default button sound
+    if(value != "red" && value != "blue" && value != "green" && value != "yellow")
+        value = "blue";
     var audio = new Audio("sounds/" + value + ".mp3");
     audio.play();
 }
@@ -82,12 +94,36 @@ function gameOver(){
         p = 0;
         gamePattern = [];
         level = 0;
-        $("#level-title").text("Game Over 💀, Press 'A' Key to Restart");
+        $("#level-title").text("Game Over 💀, should we play again?");
         var audio = new Audio("sounds/wrong.mp3");
         audio.play();
         $("body").addClass("game-over");
         setTimeout(function (){$("body").removeClass("game-over");} , 200);
+        $("#start").slideToggle(200);
     } , 90);
-    
 }
 
+function btnColor(value){
+    switch (value){
+        case "red":
+            $("#start").removeClass("red");
+            $("#start").addClass("green")
+            setTimeout(function (){btnColor("green");} , 900);
+            break;
+        case "green":
+            $("#start").removeClass("green");
+            $("#start").addClass("blue")
+            setTimeout(function (){btnColor("blue");} , 900);
+            break;
+        case "blue":
+            $("#start").removeClass("blue");
+            $("#start").addClass("yellow")
+            setTimeout(function (){btnColor("yellow");} , 900);
+            break;
+        case "yellow":
+            $("#start").removeClass("yellow");
+            $("#start").addClass("red")
+            setTimeout(function (){btnColor("red");} , 900);
+            break;
+    }
+}
