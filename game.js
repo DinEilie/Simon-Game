@@ -114,7 +114,7 @@ function playAnimation(value){
 function playPress(value){
     if (!isOver){
         $("#" + value).addClass("pressed");
-        setTimeout(function (){$("#" + value).removeClass("pressed");} , 400);
+        setTimeout(function (){$("#" + value).removeClass("pressed");} , 200);
     }
 }
 
