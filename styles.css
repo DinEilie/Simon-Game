@@ -10,7 +10,7 @@ body {
   color: #FEF2BF;
 }
 
-#start {
+.menu {
   font-family: 'Press Start 2P', cursive;
   font-size: 2rem;
   margin:  5%;

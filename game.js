@@ -1,6 +1,8 @@
 // Start
+var difficulty;
 var gamePattern = [];
 var p = 0;
+var isOver = false;
 var colors = ["red","blue","green","yellow"];
 var level = 0;
 $(".container").slideToggle(0);
@@ -37,7 +39,23 @@ $(".btn").click(function(){
         }
     } else if (this.id == "start"){
         $("#start").slideToggle(200);
-        $(".container").slideToggle(200);
+        $("#difficulty").slideToggle(200);
+        $("#level-title").text("Choose difficulty");
+        
+    } else if (this.id == "easy") {
+        $("#difficulty").slideToggle(200);
+        $("#colors").slideToggle(200);
+        difficulty = 0;
+        setTimeout(function(){nextSequence()}, 1000);
+    } else if (this.id == "medium"){
+        $("#difficulty").slideToggle(200);
+        $("#colors").slideToggle(200);
+        difficulty = 1;
+        setTimeout(function(){nextSequence()}, 1000);
+    } else if (this.id == "hard") {
+        $("#difficulty").slideToggle(200);
+        $("#colors").slideToggle(200);
+        difficulty = 2;
         setTimeout(function(){nextSequence()}, 1000);
     } else {}
 });
@@ -56,74 +74,117 @@ btnColor("yellow");
 // <!> FUNCTIONS <!>
 // Perfrom next color sequence
 function nextSequence(){
-    // Add a new color to Game Pattern by random number between 0 to 3
-    var randomNumber = Math.floor(Math.random() * 4);
-    var randomChosenColor = colors[randomNumber];
-    gamePattern.push(randomChosenColor);
-    level += 1;
-    $("#level-title").text("Level " + level);
-    playAnimation(randomChosenColor);
-    playSound(randomChosenColor);
+    if(!isOver){
+        level += 1;
+        $("#level-title").text("Level " + level);
+        var randomNumber = Math.floor(Math.random() * 4);
+        var randomChosenColor = colors[randomNumber];
+        gamePattern.push(randomChosenColor);
+
+        // Show all the colors depends on difficulty
+        if (difficulty == 0)
+            showPattern(0, 600);
+        if (difficulty == 1)
+            showPattern(0, 450);
+        if (difficulty == 2)
+            showPattern(gamePattern.length - 1, 450);
+    }
 }
 
 // Play the color sound
 function playSound(value){
-    // Default button sound
-    if(value != "red" && value != "blue" && value != "green" && value != "yellow")
-        value = "blue";
-    var audio = new Audio("sounds/" + value + ".mp3");
-    audio.play();
+    if (!isOver){
+        // Default button sound
+        if(value != "red" && value != "blue" && value != "green" && value != "yellow")
+            value = "blue";
+        var audio = new Audio("sounds/" + value + ".mp3");
+        audio.play();
+    }
 }
 
 // Play auto animation color
 function playAnimation(value){
-    $("#" + value).animate({opacity:0.5},400);
-    $("#" + value).animate({opacity:1},400);
+    if (!isOver){
+        $("#" + value).animate({opacity:0.5},400);
+        $("#" + value).animate({opacity:1},400);
+    }
 }
 
 // Play button press animation
 function playPress(value){
-    $("#" + value).addClass("pressed");
-    setTimeout(function (){$("#" + value).removeClass("pressed");} , 100);
+    if (!isOver){
+        $("#" + value).addClass("pressed");
+        setTimeout(function (){$("#" + value).removeClass("pressed");} , 400);
+    }
 }
 
 // Game over screen
 function gameOver(){
-    $(".container").slideToggle(100);
+    isOver = true;
+    var audio = new Audio("sounds/wrong.mp3");
+    audio.play();
+    $("body").addClass("game-over");
+    setTimeout(function (){$("body").removeClass("game-over");} , 200);
+    $("#colors").slideToggle(100);
+    $("#level-title").text("Game Over 💀, should we play again?");
+
     setTimeout(function (){
+        isOver = false;
         p = 0;
         gamePattern = [];
         level = 0;
-        $("#level-title").text("Game Over 💀, should we play again?");
-        var audio = new Audio("sounds/wrong.mp3");
-        audio.play();
-        $("body").addClass("game-over");
-        setTimeout(function (){$("body").removeClass("game-over");} , 200);
         $("#start").slideToggle(200);
-    } , 90);
+    } , 2000);
 }
 
+// Menu button color
 function btnColor(value){
     switch (value){
         case "red":
-            $("#start").removeClass("red");
-            $("#start").addClass("green")
+            $(".menu").removeClass("red");
+            $(".menu").addClass("green")
             setTimeout(function (){btnColor("green");} , 900);
             break;
         case "green":
-            $("#start").removeClass("green");
-            $("#start").addClass("blue")
+            $(".menu").removeClass("green");
+            $(".menu").addClass("blue")
             setTimeout(function (){btnColor("blue");} , 900);
             break;
         case "blue":
-            $("#start").removeClass("blue");
-            $("#start").addClass("yellow")
+            $(".menu").removeClass("blue");
+            $(".menu").addClass("yellow")
             setTimeout(function (){btnColor("yellow");} , 900);
             break;
         case "yellow":
-            $("#start").removeClass("yellow");
-            $("#start").addClass("red")
+            $(".menu").removeClass("yellow");
+            $(".menu").addClass("red")
             setTimeout(function (){btnColor("red");} , 900);
             break;
+    }
+}
+
+// Show colors pattern
+function showPattern(value, speed){
+    if (!isOver){
+        var i = value + 0;
+        var showInterval = setInterval(function () {
+            if (i >= gamePattern.length){
+                clearInterval(showInterval);
+            } else {
+                if (difficulty == 0){
+                    playPress(gamePattern[i]);
+                    playSound(gamePattern[i]);
+                }
+                if (difficulty == 1){
+                    playAnimation(gamePattern[i]);
+                    playSound(gamePattern[i]);
+                }
+                if (difficulty == 2) {
+                    playAnimation(gamePattern[i]);
+                    playSound(gamePattern[i]);
+                }
+                i++;
+            }
+        }, speed);
     }
 }
