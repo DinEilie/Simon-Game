@@ -5,7 +5,9 @@ var p = 0;
 var isOver = false;
 var colors = ["red","blue","green","yellow"];
 var level = 0;
-$(".container").slideToggle(0);
+$("#difficulty").slideToggle(0);
+$("#colors").slideToggle(0);
+$("#info").slideToggle(0);
 
 // Add to all buttons behaviour
 $(".btn").click(function(){
@@ -38,7 +40,8 @@ $(".btn").click(function(){
             }
         }
     } else if (this.id == "start"){
-        $("#start").slideToggle(200);
+        $("#menu").slideToggle(200);
+        $("#info").slideUp(200);
         $("#difficulty").slideToggle(200);
         $("#level-title").text("Choose difficulty");
         
@@ -57,6 +60,8 @@ $(".btn").click(function(){
         $("#colors").slideToggle(200);
         difficulty = 2;
         setTimeout(function(){nextSequence()}, 1000);
+    } else if (this.id == "explain") {
+        $("#info").slideToggle(200);
     } else {}
 });
 
@@ -126,14 +131,14 @@ function gameOver(){
     $("body").addClass("game-over");
     setTimeout(function (){$("body").removeClass("game-over");} , 200);
     $("#colors").slideToggle(100);
-    $("#level-title").text("Game Over 💀, should we play again?");
+    $("#level-title").text("Game Over 💀, shall we play again?");
 
     setTimeout(function (){
         isOver = false;
         p = 0;
         gamePattern = [];
         level = 0;
-        $("#start").slideToggle(200);
+        $("#menu").slideToggle(200);
     } , 2000);
 }
 
