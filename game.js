@@ -40,10 +40,7 @@ $(".btn").click(function(){
             }
         }
     } else if (this.id == "start"){
-        $("#menu").slideToggle(200);
-        $("#info").slideUp(200);
-        $("#difficulty").slideToggle(200);
-        $("#level-title").text("Choose difficulty");
+        gameStart();
         
     } else if (this.id == "easy") {
         $("#difficulty").slideToggle(200);
@@ -68,8 +65,7 @@ $(".btn").click(function(){
 // Press A to start/restart game
 $("body").keypress(function(event){
     if (event.key == "a" && level == 0){
-        $(".container").slideToggle(200);
-        setTimeout(function(){nextSequence()}, 400);
+        gameStart();
     }
 });
 
@@ -121,6 +117,14 @@ function playPress(value){
         $("#" + value).addClass("pressed");
         setTimeout(function (){$("#" + value).removeClass("pressed");} , 200);
     }
+}
+
+// Start game
+function gameStart(){
+    $("#menu").slideToggle(200);
+    $("#info").slideUp(200);
+    $("#difficulty").slideToggle(200);
+    $("#level-title").text("Choose difficulty");
 }
 
 // Game over screen
