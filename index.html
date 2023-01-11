@@ -1,242 +1,168 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Simon</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
-    />
-  </head>
 
-  <body>
-    <!-- Navbar -->
-    <section>
-      <div>
-        <nav
-          class="navbar p-3 sticky-top navbar-expand-lg bg-body-tertiary border-bottom"
-        >
-          <a class="navbar-brand"><i class="bi bi-cup-hot-fill"></i></a>
-          <a
-            class="navbar-brand fs-2"
-            href="https://dineilie.github.io/Snake-Game/"
-            >Coding Challenges</a
-          >
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <button
-                  class="btn btn-dark dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+<head>
+  <meta charset="utf-8" />
+  <title>Simon</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <section>
+    <div>
+      <nav class="navbar p-3 sticky-top navbar-expand-lg bg-body-tertiary border-bottom">
+        <a class="navbar-brand"><i class="bi bi-cup-hot-fill"></i></a>
+        <a class="navbar-brand fs-2" href="https://dineilie.github.io/Snake-Game/">Coding Challenges</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Browse More
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li>
-                    <a class="dropdown-item" href="#">Algorithm Visualizer</a>
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="https://dineilie.github.io/Snake-Game/"
-                      >Snake</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="https://dineilie.github.io/Simon-Game/"
-                      >Simon</a
-                    >
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li>
+                  <a class="dropdown-item" href="#">Algorithm Visualizer</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="https://dineilie.github.io/Snake-Game/">Snake</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="https://dineilie.github.io/Simon-Game/">Simon</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
 
-          <!-- Re\Start Game -->
-          <button
-            type="button"
-            class="btn game-btn btn-outline-danger me-2"
-            id="restart"
-          >
-            <i class="bi bi-arrow-repeat"></i>
-          </button>
-          <button
-            type="button"
-            class="btn game-btn btn-success me-2"
-            id="start"
-          >
-            Start <i class="bi bi-play-fill"></i>
+        <!-- Re\Start Game -->
+        <button type="button" class="btn game-btn btn-outline-danger me-2" id="restart">
+          <i class="bi bi-arrow-repeat"></i>
+        </button>
+        <button type="button" class="btn game-btn btn-success me-2" id="start">
+          Start <i class="bi bi-play-fill"></i>
+        </button>
+
+        <!-- Volume -->
+        <div class="btn-group me-2" role="group" aria-label="Basic example">
+          <!-- Up -->
+          <button type="button" class="btn btn-dark game-btn" id="down">
+            <i class="bi bi-caret-left-fill"></i>
           </button>
 
-          <!-- Volume -->
-          <div class="btn-group me-2" role="group" aria-label="Basic example">
-            <!-- Up -->
-            <button type="button" class="btn btn-dark game-btn" id="down">
-              <i class="bi bi-caret-left-fill"></i>
-            </button>
+          <!-- Un/Mute -->
+          <input type="checkbox" class="btn-check game-btn" checked id="muteButton" autocomplete="off" />
+          <label class="btn btn-outline-dark" for="muteButton" id="mute"><i
+              class="bi bi-volume-down-fill"></i></label><br />
 
-            <!-- Un/Mute -->
-            <input
-              type="checkbox"
-              class="btn-check game-btn"
-              checked
-              id="muteButton"
-              autocomplete="off"
-            />
-            <label class="btn btn-outline-dark" for="muteButton" id="mute"
-              ><i class="bi bi-volume-down-fill"></i></label
-            ><br />
-
-            <!-- Down -->
-            <button type="button" class="btn btn-dark game-btn" id="up">
-              <i class="bi bi-caret-right-fill"></i>
-            </button>
-          </div>
-
-          <!-- Difficulty -->
-          <div
-            class="btn-group text-end"
-            role="group"
-            aria-label="Basic radio toggle button group"
-          >
-            <button
-              type="button"
-              class="btn btn-dark"
-              data-bs-toggle="modal"
-              data-bs-target="#difficultyPopup"
-            >
-              Difficulty
-            </button>
-
-            <input
-              type="radio"
-              class="btn-check game-btn"
-              name="btnradio"
-              id="btnradio1"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-dark" for="btnradio1">Easy</label>
-
-            <input
-              type="radio"
-              class="btn-check game-btn"
-              name="btnradio"
-              id="btnradio2"
-              autocomplete="off"
-            />
-            <label class="btn btn-dark" for="btnradio2">Medium</label>
-
-            <input
-              type="radio"
-              class="btn-check game-btn"
-              name="btnradio"
-              id="btnradio3"
-              autocomplete="off"
-            />
-            <label class="btn btn-dark" for="btnradio3">Hard</label>
-          </div>
-        </nav>
-      </div>
-    </section>
-
-    <h1 id="level-title">Press A Key to Start 😺</h1>
-    <div id="menu" class="container">
-      <div class="row">
-        <div type="button" id="start" class="menu btn yellow">
-          <br /><br />Start Game
+          <!-- Down -->
+          <button type="button" class="btn btn-dark game-btn" id="up">
+            <i class="bi bi-caret-right-fill"></i>
+          </button>
         </div>
-        <div type="button" id="explain" class="menu btn yellow">
-          <br /><br />How to play
+
+        <!-- Difficulty -->
+        <div class="btn-group text-end" role="group" aria-label="Basic radio toggle button group">
+          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#difficultyPopup">
+            Difficulty
+          </button>
+
+          <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio1" autocomplete="off" checked />
+          <label class="btn btn-dark" for="btnradio1">Easy</label>
+
+          <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio2" autocomplete="off" />
+          <label class="btn btn-dark" for="btnradio2">Medium</label>
+
+          <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio3" autocomplete="off" />
+          <label class="btn btn-dark" for="btnradio3">Hard</label>
         </div>
-        <div id="info">
-          <p>
-            Simon is a game of short-term memory skill (originally invented by
-            Ralph H. Baer and Howard J. Morrison).<br /><br />
-            While playing series of tones and lights, the user is required to
-            repeat the sequence.<br />
-            If the user succeeds, the series becomes progressively longer and
-            more complex.<br />
-            Once the user fails the game is over.<br /><br />
-          </p>
-          <h2>Difficulties:</h2>
-          <br />
-          <p>
-            Easy - every new level the game pattern sequence will play again
-            with flashy lights.<br /><br />
-            Medium - every new level the game pattern sequence will play again
-            faster with dimmed lights.<br /><br />
-            Hard - every new level only the new color that has been added to the
-            sequence will play faster with dimmed lights.
-          </p>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Title & Information -->
+  <section>
+    <div class="container">
+      <!-- Game Title -->
+      <h1 id="level-title" class="text-center">Simon Game</h1>
+
+      <!-- Game Menu -->
+      <div class="modal fade" id="difficultyPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Simon is a game of short-term memory skill (originally invented by
+                Ralph H. Baer and Howard J. Morrison).<br /><br />
+              </p>
+              <h2>How to play:</h2>
+              <br />
+              <p>
+                While playing series of tones and lights (<span style="color: red;">Red </span>,<span
+                  style="color: green;">Green </span>,<span style="color: blue;">blue </span>and <span
+                  style="color: orange;">Yellow</span>), the user is required to
+                repeat the sequence. If the user succeeds, the series becomes progressively longer and
+                more complex. Once the user fails the game is over.
+              </p>
+              <h2>Difficulties:</h2>
+              <br />
+              <p>
+                Easy - every new level the game pattern sequence will play again
+                with flashy lights.<br /><br />
+                Medium - every new level the game pattern sequence will play again
+                faster with dimmed lights.<br /><br />
+                Hard - every new level only the new color that has been added to the
+                sequence will play and with dimmed lights.
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div id="difficulty" class="container">
-      <div class="row">
-        <div type="button" id="easy" class="menu btn yellow">
-          <br /><br />Easy 😇
-        </div>
-        <div type="button" id="medium" class="menu btn yellow">
-          <br /><br />Medium 😵
-        </div>
-        <div type="button" id="hard" class="menu btn yellow">
-          <br /><br />Hard 😈
-        </div>
-      </div>
-    </div>
+  </section>
+
+  <!-- Game Colors -->
+  <section>
     <div id="colors" class="container">
-      <div lass="row">
-        <div type="button" id="green" class="btn green"></div>
-
-        <div type="button" id="red" class="btn red"></div>
-      </div>
-
       <div class="row">
-        <div type="button" id="yellow" class="btn yellow"></div>
-        <div type="button" id="blue" class="btn blue"></div>
+        <div class="col">
+          <div type="button" id="green" class="game-btn color-btn green"></div>
+          <div type="button" id="red" class="game-btn color-btn red"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div type="button" id="yellow" class="game-btn color-btn yellow"></div>
+          <div type="button" id="blue" class="game-btn color-btn blue"></div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.js"
-      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"
-    ></script>
-    <script src="game.js"></script>
-  </body>
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="game.js"></script>
+</body>
+
 </html>

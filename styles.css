@@ -20,19 +20,6 @@ p {
   font-size: 1rem;
 }
 
-.menu {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 2rem;
-  margin:  5%;
-}
-
-.container {
-  display: block;
-  width: 50%;
-  margin: auto;
-
-}
-
 .color-btn {
   margin: 25px;
   display: inline-block;
@@ -51,19 +38,34 @@ p {
   background-color: red;
 }
 
+.red:hover {
+  background-color: darkred;
+}
+
 .green {
   background-color: green;
+}
+
+.green:hover {
+  background-color: darkgreen;
 }
 
 .blue {
   background-color: blue;
 }
 
+.blue:hover {
+  background-color: darkblue;
+}
+
 .yellow {
   background-color: yellow;
 }
+.yellow:hover {
+  background-color: darkgoldenrod;
+}
 
 .pressed {
-  box-shadow: 0 0 20px white;
+  box-shadow: 0 0 20px black;
   background-color: grey;
 }
