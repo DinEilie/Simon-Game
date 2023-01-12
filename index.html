@@ -44,56 +44,58 @@
           </ul>
         </div>
 
-        <!-- Re\Start Game -->
-        <button type="button" class="btn game-btn btn-outline-danger me-2" id="restart">
-          <i class="bi bi-arrow-repeat"></i>
-        </button>
-        <button type="button" class="btn game-btn btn-success me-2" id="start">
-          Start <i class="bi bi-play-fill"></i>
-        </button>
-
-        <!-- Volume -->
-        <div class="btn-group me-2" role="group" aria-label="Basic example">
-          <!-- Up -->
-          <button type="button" class="btn btn-dark game-btn" id="down">
-            <i class="bi bi-caret-left-fill"></i>
+        <div class="fadeLeft">
+          <!-- Re\Start Game -->
+          <button type="button" class="btn game-btn btn-outline-danger me-2" id="restart">
+            <i class="bi bi-arrow-repeat"></i>
+          </button>
+          <button type="button" class="btn game-btn btn-success me-2" id="start">
+            Start <i class="bi bi-play-fill"></i>
           </button>
 
-          <!-- Un/Mute -->
-          <input type="checkbox" class="btn-check game-btn" checked id="muteButton" autocomplete="off" />
-          <label class="btn btn-outline-dark" for="muteButton" id="mute"><i
-              class="bi bi-volume-down-fill"></i></label><br />
+          <!-- Volume -->
+          <div class="btn-group me-2" role="group" aria-label="Basic example">
+            <!-- Up -->
+            <button type="button" class="btn btn-dark game-btn" id="down">
+              <i class="bi bi-caret-left-fill"></i>
+            </button>
 
-          <!-- Down -->
-          <button type="button" class="btn btn-dark game-btn" id="up">
-            <i class="bi bi-caret-right-fill"></i>
-          </button>
-        </div>
+            <!-- Un/Mute -->
+            <input type="checkbox" class="btn-check game-btn" checked id="muteButton" autocomplete="off" />
+            <label class="btn btn-outline-dark" for="muteButton" id="mute"><i
+                class="bi bi-volume-down-fill"></i></label><br />
 
-        <!-- Difficulty -->
-        <div class="btn-group text-end" role="group" aria-label="Basic radio toggle button group">
-          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#difficultyPopup">
-            Difficulty
-          </button>
+            <!-- Down -->
+            <button type="button" class="btn btn-dark game-btn" id="up">
+              <i class="bi bi-caret-right-fill"></i>
+            </button>
+          </div>
 
-          <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio1" autocomplete="off" checked />
-          <label class="btn btn-dark" for="btnradio1">Easy</label>
+          <!-- Difficulty -->
+          <div class="btn-group text-end" role="group" aria-label="Basic radio toggle button group">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#difficultyPopup">
+              <i class="bi bi-question-lg"></i>
+            </button>
 
-          <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio2" autocomplete="off" />
-          <label class="btn btn-dark" for="btnradio2">Medium</label>
+            <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio1" autocomplete="off" checked />
+            <label class="btn btn-dark" for="btnradio1">Easy</label>
 
-          <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio3" autocomplete="off" />
-          <label class="btn btn-dark" for="btnradio3">Hard</label>
+            <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio2" autocomplete="off" />
+            <label class="btn btn-dark" for="btnradio2">Medium</label>
+
+            <input type="radio" class="btn-check game-btn" name="btnradio" id="btnradio3" autocomplete="off" />
+            <label class="btn btn-dark" for="btnradio3">Hard</label>
+          </div>
         </div>
       </nav>
     </div>
   </section>
 
   <!-- Title & Information -->
-  <section>
+  <section id="title">
     <div class="container">
       <!-- Game Title -->
-      <h1 id="level-title" class="text-center">Simon Game</h1>
+      <h1 id="level-title" class="text-center fadeDown">Simon Game</h1>
 
       <!-- Game Menu -->
       <div class="modal fade" id="difficultyPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,29 +142,41 @@
   </section>
 
   <!-- Game Colors -->
-  <section>
-    <div id="colors" class="container">
+  <section id="colors">
+    <div class="container fadeIn">
       <div class="row">
         <div class="col">
-          <div type="button" id="green" class="game-btn color-btn green"></div>
-          <div type="button" id="red" class="game-btn color-btn red"></div>
+          <div type="button" id="green" class="game-btn color-btn colorSwapG"></div>
+          <div type="button" id="red" class="game-btn color-btn colorSwapR"></div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <div type="button" id="yellow" class="game-btn color-btn yellow"></div>
-          <div type="button" id="blue" class="game-btn color-btn blue"></div>
+          <div type="button" id="blue" class="game-btn color-btn colorSwapB"></div>
+          <div type="button" id="yellow" class="game-btn color-btn colorSwapY"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-  <script src="game.js"></script>
+  <!-- Footer -->
+  <section id="footer">
+    <footer>
+      <div class="container text-center">
+        <p class="text-center fadeUp">© Copyright Simon Game - by Din Eilie</p>
+      </div>
+    </footer>
+  </section>
+
+  <!-- Scripts -->
+  <section>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"></script>
+    <script src="game.js"></script>
+  </section>
 </body>
 
 </html>

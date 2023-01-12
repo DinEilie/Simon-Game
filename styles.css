@@ -4,12 +4,12 @@ body {
 
 h1 {
   font-size: 3rem;
-  margin:  5%;
+  margin: 2%;
 }
 
 h2 {
   font-size: 1.5rem;
-  margin:  5%;
+  margin: 2%;
 }
 
 p {
@@ -21,7 +21,7 @@ p {
 }
 
 .color-btn {
-  margin: 25px;
+  margin: 20px;
   display: inline-block;
   height: 200px;
   width: 200px;
@@ -61,6 +61,7 @@ p {
 .yellow {
   background-color: yellow;
 }
+
 .yellow:hover {
   background-color: darkgoldenrod;
 }
@@ -68,4 +69,158 @@ p {
 .pressed {
   box-shadow: 0 0 20px black;
   background-color: grey;
+}
+
+.colorSwapR {
+  animation-name: exampleR;
+  background-color: red;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+.colorSwapG {
+  animation-name: exampleG;
+  background-color: green;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+.colorSwapB {
+  animation-name: exampleB;
+  background-color: blue;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+.colorSwapY {
+  animation-name: exampleY;
+  background-color: yellow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes exampleR {
+  0% {
+    background-color: red;
+  }
+  25% {
+    background-color: yellow;
+  }
+  50% {
+    background-color: blue;
+  }
+  75% {
+    background-color: green;
+  }
+}
+
+@keyframes exampleG {
+  0% {
+    background-color: green;
+  }
+  25% {
+    background-color: red;
+  }
+  50% {
+    background-color: yellow;
+  }
+  75% {
+    background-color: blue;
+  }
+}
+@keyframes exampleB {
+  0% {
+    background-color: blue;
+  }
+  25% {
+    background-color: green;
+  }
+  50% {
+    background-color: red;
+  }
+  75% {
+    background-color: yellow;
+  }
+}
+@keyframes exampleY {
+  0% {
+    background-color: yellow;
+  }
+  25% {
+    background-color: blue;
+  }
+  50% {
+    background-color: green;
+  }
+  75% {
+    background-color: red;
+  }
+}
+
+.fadeUp {
+  animation-name: exampleFU;
+  animation-duration: 1.5s;
+}
+
+.fadeDown {
+  animation-name: exampleFD;
+  animation-duration: 1.5s;
+}
+
+.fadeIn {
+  animation-name: exampleFI;
+  animation-duration: 1.5s;
+}
+
+.fadeLeft {
+  animation-name: exampleFL;
+  animation-duration: 1.5s;
+}
+
+@keyframes exampleFD {
+  0% {
+    opacity: 0;
+    position: relative;
+    bottom: 120px;
+  }
+  50% {
+    opacity: 0.9;
+    position: relative;
+    bottom: 0px;
+  }
+}
+
+@keyframes exampleFU {
+  0% {
+    opacity: 0;
+    position: relative;
+    top: 30px;
+  }
+  50% {
+    opacity: 0.8;
+    position: relative;
+    top: 0px;
+  }
+}
+
+@keyframes exampleFI {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes exampleFL {
+  0% {
+    opacity: 0;
+    position: relative;
+    left: 15px;
+  }
+  80% {
+    opacity: 1;
+    position: relative;
+    left: 0px;
+  }
 }

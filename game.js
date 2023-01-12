@@ -4,11 +4,10 @@ var gamePattern = [];
 var p = 0;
 var isOver = false;
 var isPaused = false;
-var soundVolume = 0.50;
+var soundVolume = 0.5;
 var isMuted = false;
 var colors = ["red", "blue", "green", "yellow"];
 var level = 0;
-var stopColor = false;
 $("#restart").fadeToggle(0);
 
 // Add to all buttons behaviour
@@ -18,7 +17,8 @@ $(".game-btn").click(function () {
       this.id == "blue" ||
       this.id == "green" ||
       this.id == "yellow") &&
-    level > 0
+    level > 0 &&
+    !isOver
   ) {
     playPress(this.id);
     playSound(this.id);
@@ -47,31 +47,23 @@ $(".game-btn").click(function () {
       }
     }
   } else if (this.id == "start") {
-    if (level < 1) {
-      $("#start").addClass("disabled");
-      $("#start").html('Pause <i class="bi bi-pause-fill"></i>');
-      $("#restart").fadeToggle(200);
-      $("#restart").addClass("disabled");
-      stopColor = true;
-      resetBtnColor();
-    } else {
-      if (isPaused) {
-        isPaused = false;
-        $("#start").html('Pause <i class="bi bi-pause-fill"></i>');
-      } else {
-        isPaused = true;
-        $("#start").html('Resume <i class="bi bi-play-fill"></i>');
-      }
-    }
+    $("#start").fadeToggle(200);
+    $("#restart").fadeToggle(200);
+    $("#restart").addClass("disabled");
+    resetColor();
     gameStart();
   } else if (this.id == "restart") {
-    $("#start").addClass("disabled");
-    $("#restart").addClass("disabled");
-    isOver = true;
+    $("#restart").fadeToggle(200);
     playSound("wrong");
+    isOver = true;
     $("body").addClass("game-over");
+    $(".color-btn").removeClass("red");
+    $(".color-btn").removeClass("blue");
+    $(".color-btn").removeClass("green");
+    $(".color-btn").removeClass("yellow");
     setTimeout(function () {
       $("body").removeClass("game-over");
+      $(".color-btn").addClass("pressed");
     }, 200);
     $("#level-title").text("Restarted!");
     setTimeout(function () {
@@ -114,12 +106,6 @@ $(".game-btn").click(function () {
   }
 });
 
-// Activate buttons color
-btnColor("yellow", "yellow");
-btnColor("red", "red");
-btnColor("green", "green");
-btnColor("blue", "blue");
-
 // Perfrom next color sequence
 function nextSequence() {
   if (!isOver) {
@@ -138,25 +124,24 @@ function nextSequence() {
 
 // Play the color sound
 function playSound(value) {
-  if (!isOver) {
-    // Default button sound
-    if (
-      value != "red" &&
-      value != "blue" &&
-      value != "green" &&
-      value != "yellow" &&
-      value != "wrong"
-    )
-      value = "blue";
-    var audio = new Audio("sounds/" + value + ".mp3");
-    audio.play();
-  }
+  // Default button sound
+  if (
+    value != "red" &&
+    value != "blue" &&
+    value != "green" &&
+    value != "yellow" &&
+    value != "wrong"
+  )
+    value = "blue";
+  var audio = new Audio("sounds/" + value + ".mp3");
+  audio.volume = soundVolume;
+  audio.play();
 }
 
 // Play auto animation color
 function playAnimation(value) {
   if (!isOver) {
-    $("#" + value).animate({ opacity: 0.5 }, 400);
+    $("#" + value).animate({ opacity: 0.5 }, 0);
     $("#" + value).animate({ opacity: 1 }, 400);
   }
 }
@@ -188,11 +173,10 @@ function gameStart() {
   }, 3200);
   setTimeout(function () {
     $("#level-title").text("Go!!!");
-    playSound("yellow");
+    playSound("red");
   }, 4200);
   setTimeout(function () {
     $("#restart").removeClass("disabled");
-    $("#start").removeClass("disabled");
     $("#level-title").text("Level " + level);
     nextSequence();
   }, 5200);
@@ -200,11 +184,17 @@ function gameStart() {
 
 // Game over screen
 function gameOver() {
-  isOver = true;
+  $("#restart").fadeToggle(200);
   playSound("wrong");
+  isOver = true;
   $("body").addClass("game-over");
+  $(".color-btn").removeClass("red");
+  $(".color-btn").removeClass("blue");
+  $(".color-btn").removeClass("green");
+  $(".color-btn").removeClass("yellow");
   setTimeout(function () {
     $("body").removeClass("game-over");
+    $(".color-btn").addClass("pressed");
   }, 200);
   $("#level-title").text("💀 Game Over 💀");
   setTimeout(function () {
@@ -216,74 +206,39 @@ function gameOver() {
 }
 
 function restartGame() {
-  $("#start").removeClass("disabled");
-  $("#start").html('Start <i class="bi bi-play-fill">');
-  $("#restart").fadeToggle(200);
+  $("#start").fadeToggle(200);
   isOver = false;
   p = 0;
   gamePattern = [];
   level = 0;
-  resetBtnColor();
-  btnColor("yellow", "yellow");
-  btnColor("red", "red");
-  btnColor("green", "green");
-  btnColor("blue", "blue");
+  swapColor();
   $("#level-title").text("Simon Game");
 }
 
-// Menu button color
-function btnColor(idValue, value) {
-  if (!stopColor) {
-    switch (value) {
-      case "red":
-        $("#" + idValue).removeClass("red");
-        $("#" + idValue).addClass("green");
-        setTimeout(function () {
-          btnColor(idValue, "green");
-        }, 900);
-        break;
-      case "green":
-        $("#" + idValue).removeClass("green");
-        $("#" + idValue).addClass("blue");
-        setTimeout(function () {
-          btnColor(idValue, "blue");
-        }, 900);
-        break;
-      case "blue":
-        $("#" + idValue).removeClass("blue");
-        $("#" + idValue).addClass("yellow");
-        setTimeout(function () {
-          btnColor(idValue, "yellow");
-        }, 900);
-        break;
-      case "yellow":
-        $("#" + idValue).removeClass("yellow");
-        $("#" + idValue).addClass("red");
-        setTimeout(function () {
-          btnColor(idValue, "red");
-        }, 900);
-        break;
-    }
-  }
-}
-
-function resetBtnColor() {
-  $("#red").removeClass("green");
-  $("#red").removeClass("blue");
-  $("#red").removeClass("yellow");
-  $("#yellow").removeClass("green");
-  $("#yellow").removeClass("blue");
-  $("#yellow").removeClass("red");
-  $("#blue").removeClass("green");
-  $("#blue").removeClass("red");
-  $("#blue").removeClass("yellow");
-  $("#green").removeClass("red");
-  $("#green").removeClass("blue");
-  $("#green").removeClass("yellow");
+// Reset the button colors to their original color
+function resetColor() {
+  $(".color-btn").removeClass("colorSwapR");
+  $(".color-btn").removeClass("colorSwapB");
+  $(".color-btn").removeClass("colorSwapG");
+  $(".color-btn").removeClass("colorSwapY");
+  $(".color-btn").removeClass("pressed");
   $("#red").addClass("red");
   $("#blue").addClass("blue");
   $("#yellow").addClass("yellow");
   $("#green").addClass("green");
+}
+
+// Swap the button colors from their original color
+function swapColor() {
+  $(".color-btn").removeClass("red");
+  $(".color-btn").removeClass("blue");
+  $(".color-btn").removeClass("green");
+  $(".color-btn").removeClass("yellow");
+  $(".color-btn").removeClass("pressed");
+  $("#red").addClass("colorSwapR");
+  $("#yellow").addClass("colorSwapY");
+  $("#blue").addClass("colorSwapB");
+  $("#green").addClass("colorSwapG");
 }
 
 // Show colors pattern
